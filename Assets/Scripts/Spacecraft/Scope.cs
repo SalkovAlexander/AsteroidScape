@@ -30,18 +30,24 @@ public class Scope : MonoBehaviour
             //Adding target
             if (Input.GetMouseButtonDown(1))
             {
+                if(MissleTarget != null)
+                    MissleTarget.gameObject.layer = 1;
                 Debug.Log("Target changed");
                 MissleTarget = hitInfo.transform;
+                gameObject.GetComponent<MissileLauncher>().MissileTarget = MissleTarget;
+                MissleTarget.gameObject.layer = 7;
             }
         }
         else
         {
             objectToPlace.SetActive(false);
-        }
-        
-        if(MissleTarget != null)
-        {
-            gameObject.GetComponent<MissileLauncher>().MissileTarget = MissleTarget;
+            if (Input.GetMouseButtonDown(1))
+            {
+                if(MissleTarget != null)
+                    MissleTarget.gameObject.layer = 1;
+                MissleTarget = null;
+                gameObject.GetComponent<MissileLauncher>().MissileTarget = MissleTarget;
+            }
         }
     }
 }
