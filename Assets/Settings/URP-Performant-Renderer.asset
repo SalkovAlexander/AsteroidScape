@@ -39,10 +39,10 @@ MonoBehaviour:
   m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 2147483647
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 2147483647
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: Outline
-    Event: 300
+    Event: 1000
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -82,8 +82,8 @@ MonoBehaviour:
       PassNames: []
     overrideMaterial: {fileID: 2100000, guid: 25b713318e502b541bbc6d7816d22b56, type: 2}
     overrideMaterialPassIndex: 0
-    overrideDepthState: 1
-    depthCompareFunction: 5
+    overrideDepthState: 0
+    depthCompareFunction: 1
     enableWrite: 0
     stencilSettings:
       overrideStencilState: 0
