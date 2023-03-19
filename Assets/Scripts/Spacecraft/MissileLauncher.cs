@@ -9,6 +9,7 @@ public class MissileLauncher : MonoBehaviour
     [SerializeField] private GameObject prefab; // The prefab to spawn
     [SerializeField] private float force = 100f; // The force to add to the spawned prefab
     [SerializeField] private float SpawnOffset = 5f;
+    [SerializeField] public Transform MissileTarget = null;
 
 
 
@@ -31,5 +32,10 @@ public class MissileLauncher : MonoBehaviour
         GameObject newObject = Instantiate(prefab, transform.position + transform.forward * SpawnOffset, transform.rotation); // Spawn the prefab at the position of the game object
         Rigidbody rb = newObject.GetComponent<Rigidbody>(); // Get the Rigidbody component of the spawned prefab
         rb.AddForce(transform.forward.normalized * force, ForceMode.Impulse); // Apply the specified force in the forward direction of the game object
+
+        if(MissileTarget != null)
+        {
+            newObject.GetComponent<AutoaimMissile>().target = MissileTarget;
+        }
     }
 }

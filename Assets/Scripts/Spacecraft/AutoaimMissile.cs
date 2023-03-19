@@ -6,7 +6,7 @@ public class AutoaimMissile : MonoBehaviour
 {
     public Transform target;
     public float speed = 10f;
-    public float turnSpeed = 5f;
+    public float turnSpeed = 10f;
 
     private Rigidbody rb;
 
@@ -31,6 +31,13 @@ public class AutoaimMissile : MonoBehaviour
 
             // Move the missile forwards towards the target
             rb.MovePosition(transform.position + transform.forward * speed * Time.deltaTime);
+
+            // Vector3 direction = target.transform.position - transform.position;
+            // rb.AddForce(direction.normalized * speed, ForceMode.Force);
+        }
+        else
+        {
+            rb.AddForce(transform.forward.normalized * speed, ForceMode.Impulse);
         }
     }
 }

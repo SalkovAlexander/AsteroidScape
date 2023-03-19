@@ -3835,9 +3835,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44021b6efb2e7d346ba8edddfc801bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 632719792753670275, guid: ac23bf0340dc88a489acafb9eda1db24, type: 3}
-  force: 400
+  prefab: {fileID: 3602772505407922101, guid: cee47ea3249563c4695a7c4399486105, type: 3}
+  force: 0
   SpawnOffset: 8
+  MissileTarget: {fileID: 0}
 --- !u!114 &1719733291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3869,6 +3870,7 @@ MonoBehaviour:
   ignoreLayer:
     serializedVersion: 2
     m_Bits: 64
+  MissleTarget: {fileID: 0}
 --- !u!1001 &1723970527
 PrefabInstance:
   m_ObjectHideFlags: 0

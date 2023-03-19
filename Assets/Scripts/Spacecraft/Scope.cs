@@ -8,6 +8,7 @@ public class Scope : MonoBehaviour
     [SerializeField] private GameObject Prefab = null;
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask ignoreLayer;
+    [SerializeField] private Transform MissleTarget = null;
 
     private void Start()
     {
@@ -25,10 +26,22 @@ public class Scope : MonoBehaviour
             objectToPlace.SetActive(true);
             objectToPlace.transform.position = hitInfo.point;
             objectToPlace.transform.rotation = transform.rotation;
+
+            //Adding target
+            if (Input.GetMouseButtonDown(1))
+            {
+                Debug.Log("Target changed");
+                MissleTarget = hitInfo.transform;
+            }
         }
         else
         {
             objectToPlace.SetActive(false);
+        }
+        
+        if(MissleTarget != null)
+        {
+            gameObject.GetComponent<MissileLauncher>().MissileTarget = MissleTarget;
         }
     }
 }
