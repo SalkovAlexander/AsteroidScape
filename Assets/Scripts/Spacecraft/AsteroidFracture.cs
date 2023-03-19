@@ -7,7 +7,7 @@ public class AsteroidFracture : MonoBehaviour
     [SerializeField] GameObject ShardsPrefab = null;
     private bool isQuitting = false;
 
-     void OnApplicationQuit()
+    void OnApplicationQuit()
     {
         isQuitting = true;
     }

@@ -6,12 +6,10 @@ using UnityEngine.InputSystem;
 public class MissileLauncher : MonoBehaviour
 {
     private Spacecraft MissileLaunch = null;
-    [SerializeField] private GameObject prefab; // The prefab to spawn
-    [SerializeField] private float force = 100f; // The force to add to the spawned prefab
+    [SerializeField] private GameObject prefab;
+    [SerializeField] private float force = 100f;
     [SerializeField] private float SpawnOffset = 5f;
     [SerializeField] public Transform MissileTarget = null;
-
-
 
     private void OnEnable() {
         MissileLaunch.Enable();

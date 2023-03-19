@@ -53,6 +53,15 @@ public partial class @Spacecraft : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""91d959dd-45e5-43a0-ac4e-90e87f2422ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -191,7 +200,7 @@ public partial class @Spacecraft : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""afe756af-a7b7-410e-8150-9a91ae4f2c55"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -308,6 +317,28 @@ public partial class @Spacecraft : IInputActionCollection2, IDisposable
                     ""action"": ""Orientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84916346-3d20-4071-80c5-7b95bc58c2d1"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""790f5ffe-2934-4990-b6d6-1b41bd4b919d"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -319,6 +350,7 @@ public partial class @Spacecraft : IInputActionCollection2, IDisposable
         m_Player_ThrustRoll = m_Player.FindAction("ThrustRoll", throwIfNotFound: true);
         m_Player_Orientation = m_Player.FindAction("Orientation", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+        m_Player_SelectTarget = m_Player.FindAction("SelectTarget", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -381,6 +413,7 @@ public partial class @Spacecraft : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ThrustRoll;
     private readonly InputAction m_Player_Orientation;
     private readonly InputAction m_Player_Fire;
+    private readonly InputAction m_Player_SelectTarget;
     public struct PlayerActions
     {
         private @Spacecraft m_Wrapper;
@@ -388,6 +421,7 @@ public partial class @Spacecraft : IInputActionCollection2, IDisposable
         public InputAction @ThrustRoll => m_Wrapper.m_Player_ThrustRoll;
         public InputAction @Orientation => m_Wrapper.m_Player_Orientation;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
+        public InputAction @SelectTarget => m_Wrapper.m_Player_SelectTarget;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -406,6 +440,9 @@ public partial class @Spacecraft : IInputActionCollection2, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @SelectTarget.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectTarget;
+                @SelectTarget.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectTarget;
+                @SelectTarget.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectTarget;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -419,6 +456,9 @@ public partial class @Spacecraft : IInputActionCollection2, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @SelectTarget.started += instance.OnSelectTarget;
+                @SelectTarget.performed += instance.OnSelectTarget;
+                @SelectTarget.canceled += instance.OnSelectTarget;
             }
         }
     }
@@ -428,5 +468,6 @@ public partial class @Spacecraft : IInputActionCollection2, IDisposable
         void OnThrustRoll(InputAction.CallbackContext context);
         void OnOrientation(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnSelectTarget(InputAction.CallbackContext context);
     }
 }

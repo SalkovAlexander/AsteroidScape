@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Scope : MonoBehaviour
 {
@@ -9,11 +10,38 @@ public class Scope : MonoBehaviour
     [SerializeField] private float raycastDistance = 10f;
     [SerializeField] private LayerMask ignoreLayer;
     [SerializeField] private Transform MissleTarget = null;
+    [SerializeField] private Transform CurrentMissleTarget = null;
+    private Spacecraft SelectTarget = null;
 
-    private void Start()
+    private void OnEnable() {
+        SelectTarget.Enable();
+        SelectTarget.Player.SelectTarget.performed += SetTarget;
+    }
+
+    private void OnDisable() {
+        SelectTarget.Disable();
+        SelectTarget.Player.SelectTarget.performed -= SetTarget;
+    }
+
+    private void Awake()
     {
+        SelectTarget = new Spacecraft();
         objectToPlace = Instantiate(Prefab, Vector3.zero, Quaternion.Euler(Vector3.zero));
         objectToPlace.SetActive(false);
+    }
+
+    public void SetTarget(InputAction.CallbackContext Value)
+    {
+        if(MissleTarget != null)
+            MissleTarget.gameObject.layer = 1;
+        if(CurrentMissleTarget != null)
+        {
+            MissleTarget = CurrentMissleTarget;
+            CurrentMissleTarget.gameObject.layer = 7;
+        }
+        else
+            MissleTarget = null;
+        gameObject.GetComponent<MissileLauncher>().MissileTarget = MissleTarget;
     }
 
     void Update()
@@ -27,27 +55,12 @@ public class Scope : MonoBehaviour
             objectToPlace.transform.position = hitInfo.point;
             objectToPlace.transform.rotation = transform.rotation;
 
-            //Adding target
-            if (Input.GetMouseButtonDown(1))
-            {
-                if(MissleTarget != null)
-                    MissleTarget.gameObject.layer = 1;
-                Debug.Log("Target changed");
-                MissleTarget = hitInfo.transform;
-                gameObject.GetComponent<MissileLauncher>().MissileTarget = MissleTarget;
-                MissleTarget.gameObject.layer = 7;
-            }
+            CurrentMissleTarget = hitInfo.transform;
         }
         else
         {
+            CurrentMissleTarget = null;
             objectToPlace.SetActive(false);
-            if (Input.GetMouseButtonDown(1))
-            {
-                if(MissleTarget != null)
-                    MissleTarget.gameObject.layer = 1;
-                MissleTarget = null;
-                gameObject.GetComponent<MissileLauncher>().MissileTarget = MissleTarget;
-            }
-        }
+        }    
     }
 }
