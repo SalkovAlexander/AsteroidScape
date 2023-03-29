@@ -10,7 +10,9 @@ public class MissileLauncher : MonoBehaviour
     [SerializeField] private float force = 100f;
     [SerializeField] private float SpawnOffset = 5f;
     [SerializeField] public Transform MissileTarget = null;
+    [SerializeField] private bool isControlledByPlayer = true;
 
+    //Поебень для инпут системы
     private void OnEnable() {
         MissileLaunch.Enable();
         MissileLaunch.Player.Fire.performed += Launch;
@@ -24,12 +26,28 @@ public class MissileLauncher : MonoBehaviour
     void Awake(){
         MissileLaunch = new Spacecraft();
     }
+    //Конец поебени
 
     public void Launch(InputAction.CallbackContext Value)
     {
-        GameObject newObject = Instantiate(prefab, transform.position + transform.forward * SpawnOffset, transform.rotation); // Spawn the prefab at the position of the game object
-        Rigidbody rb = newObject.GetComponent<Rigidbody>(); // Get the Rigidbody component of the spawned prefab
-        rb.AddForce(transform.forward.normalized * force, ForceMode.Impulse); // Apply the specified force in the forward direction of the game object
+        if(isControlledByPlayer)
+        {
+            GameObject newObject = Instantiate(prefab, transform.position + transform.forward * SpawnOffset, transform.rotation);
+            Rigidbody rb = newObject.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward.normalized * force, ForceMode.Impulse);
+
+            if(MissileTarget != null)
+            {
+                newObject.GetComponent<AutoaimMissile>().target = MissileTarget;
+            }
+        }
+    }
+    //ПерегрузО4ка
+    public void Launch()
+    {
+        GameObject newObject = Instantiate(prefab, transform.position + transform.forward * SpawnOffset, transform.rotation);
+        Rigidbody rb = newObject.GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward.normalized * force, ForceMode.Impulse);
 
         if(MissileTarget != null)
         {

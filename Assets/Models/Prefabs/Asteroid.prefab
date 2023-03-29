@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 492277282653988891}
   - component: {fileID: 1231028840348218525}
   - component: {fileID: 1231028840348218523}
-  - component: {fileID: -7423314631973476214}
   - component: {fileID: -6819598007104357170}
+  - component: {fileID: 1356839873163829184}
   m_Layer: 0
   m_Name: Asteroid
-  m_TagString: Untagged
+  m_TagString: Zalupa
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,20 +117,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-7423314631973476214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149369192954612174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef9e365b6fd5c9e4e9359a79af5be7d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
 --- !u!114 &-6819598007104357170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +131,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShardsPrefab: {fileID: 7636818448446088220, guid: 67f6e405cee61b14e883935d07cd9bbc,
     type: 3}
+--- !u!114 &1356839873163829184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2149369192954612174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a56977c31b331b40853ec2599c3d775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMaser: 0
+  MaxHealth: 150
+  CurrentHealth: 0
+  Damage: 20
