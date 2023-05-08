@@ -32,11 +32,11 @@ public class Spacecraft_controls : MonoBehaviour
     }
 
     void Update(){
-
+        
     }
 
     private void FixedUpdate() {
-        rb.AddRelativeForce(new Vector3(0, 0, Movement.Player.ThrustRoll.ReadValue<Vector2>().y)*ThrusterSpeed);
+        rb.AddRelativeForce(new Vector3(0, 0,Mathf.Clamp(Movement.Player.ThrustRoll.ReadValue<Vector2>().y, 0, 1))*ThrusterSpeed);
         rb.AddRelativeTorque(new Vector3(Movement.Player.Orientation.ReadValue<Vector2>().y*-1, Movement.Player.Orientation.ReadValue<Vector2>().x, Movement.Player.ThrustRoll.ReadValue<Vector2>().x*-1)*OrientationSpeed);
     }
 }
