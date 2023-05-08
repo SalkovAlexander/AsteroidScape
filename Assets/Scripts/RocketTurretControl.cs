@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class RocketTurretControl : MonoBehaviour
 {
-    public float callInterval = 10f; // the time interval between function calls
+    [SerializeField] private float callInterval = 10f; // the time interval between function calls
+    [SerializeField] private float attackDistance = 10;
+    [SerializeField] private Transform target = null;
     private float timer = 0f; // a timer to keep track of the time elapsed
 
 
@@ -17,6 +19,7 @@ public class RocketTurretControl : MonoBehaviour
         if (timer >= callInterval)
         {
             // call the function
+            this.gameObject.GetComponent<MissileLauncher>().MissileTarget = target;
             this.gameObject.GetComponent<MissileLauncher>().Launch();
 
             // reset the timer

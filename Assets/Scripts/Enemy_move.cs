@@ -8,7 +8,7 @@ public class Enemy_move : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private float speed = 5f;
-    [SerializeField] private float findDistance = 1f;
+    [SerializeField] private float attackDistance = 1f;
     [SerializeField] private float approachDistance = 1f; 
     [SerializeField] private LayerMask obstacleMask;
     [SerializeField] private float maxReflectionAngle = 45f;
@@ -29,7 +29,7 @@ public class Enemy_move : MonoBehaviour
         Vector3 targetDir = target.position - transform.position;
         float targetDistance = targetDir.magnitude;
 
-        if (targetDistance < findDistance && targetDistance > approachDistance)
+        if (targetDistance < attackDistance && targetDistance > approachDistance)
         {
             Vector3 moveDir = targetDir.normalized;
 
@@ -69,12 +69,12 @@ public class Enemy_move : MonoBehaviour
 [CustomEditor(typeof(Enemy_move))]
 public class HandlesDemoEditor : Editor
 {
-    SerializedProperty findDistance;
+    SerializedProperty attackDistance;
     SerializedProperty approachDistance;
 
     void OnEnable()
     {
-        findDistance = serializedObject.FindProperty("findDistance");
+        attackDistance = serializedObject.FindProperty("attackDistance");
         approachDistance = serializedObject.FindProperty("approachDistance");
     }
     public void OnSceneGUI()
@@ -83,14 +83,14 @@ public class HandlesDemoEditor : Editor
         EditorGUI.BeginChangeCheck();
 
         Handles.color = Color.red;
-        float newFindDistance = Handles.RadiusHandle(Quaternion.identity, linkedObject.transform.position, findDistance.floatValue, false);
+        float newAttackDistance = Handles.RadiusHandle(Quaternion.identity, linkedObject.transform.position, attackDistance.floatValue, false);
         Handles.color = Color.blue;
         float newApproachDistance = Handles.RadiusHandle(Quaternion.identity, linkedObject.transform.position, approachDistance.floatValue, false);
 
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(target, "Update params");
-            findDistance.floatValue = newFindDistance;
+            attackDistance.floatValue = newAttackDistance;
             approachDistance.floatValue = newApproachDistance;
             serializedObject.ApplyModifiedProperties();
         }
