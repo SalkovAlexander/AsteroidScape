@@ -65,9 +65,8 @@ public class Enemy_move : MonoBehaviour
     }
 }
 
-
 [CustomEditor(typeof(Enemy_move))]
-public class HandlesDemoEditor : Editor
+public class HandlesEditor : Editor
 {
     SerializedProperty attackDistance;
     SerializedProperty approachDistance;
