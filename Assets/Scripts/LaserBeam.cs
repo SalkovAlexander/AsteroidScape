@@ -25,18 +25,21 @@ public class LaserBeam : MonoBehaviour
         {
             if(hit.rigidbody.gameObject.CompareTag(damageTag) && isDamager)
             {
+                Debug.Log("HIT");
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, hit.point);
                 hit.rigidbody.gameObject.GetComponent<HDSystem>().TakeDamage(DamagePerSeconf*Time.deltaTime);
             }
             else
             {
+                Debug.Log("HIT BUUUT");
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, transform.position);
             }
         }
         else
         {
+            Debug.Log("NO HIT");
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, transform.position);
         }

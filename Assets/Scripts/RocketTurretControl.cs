@@ -5,9 +5,8 @@ using UnityEditor;
 
 public class RocketTurretControl : TurretController
 {
-    [SerializeField] private float callInterval = 10f; // the time interval between function calls
-    
-    private float timer = 0f; // a timer to keep track of the time elapsed
+    [SerializeField] private float callInterval = 10f;
+    private float timer = 0f;
 
     private void Start() 
     {
@@ -29,27 +28,15 @@ public class RocketTurretControl : TurretController
 }
 
 [CustomEditor(typeof(RocketTurretControl))]
-public class HandlesEditor_one : Editor
+public class HandlesEditor_two : HandlesEditor_one
 {
-    SerializedProperty attackDistance;
-
     void OnEnable()
     {
-        attackDistance = serializedObject.FindProperty("attackDistance");
+        base.OnEnable();
     }
-    public void OnSceneGUI()
+
+    public override void OnInspectorGUI()
     {
-        var linkedObject = target as RocketTurretControl;
-        EditorGUI.BeginChangeCheck();
-
-        Handles.color = Color.red;
-        float newAttackDistance = Handles.RadiusHandle(Quaternion.identity, linkedObject.transform.position, attackDistance.floatValue, false);
-
-        if (EditorGUI.EndChangeCheck())
-        {
-            Undo.RecordObject(target, "Update params");
-            attackDistance.floatValue = newAttackDistance;
-            serializedObject.ApplyModifiedProperties();
-        }
+        base.OnInspectorGUI();
     }
 }

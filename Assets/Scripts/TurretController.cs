@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class TurretController : MonoBehaviour
 {
@@ -58,6 +59,32 @@ public class TurretController : MonoBehaviour
                     xHingeBone.localRotation = Quaternion.RotateTowards(xHingeBone.localRotation, xHingeRotationOffset * xHingeRotation, rotationSpeed * Time.deltaTime);
                 }
             }
+        }
+    }
+}
+
+[CustomEditor(typeof(TurretController))]
+public class HandlesEditor_one : Editor
+{
+    SerializedProperty attackDistance;
+
+    protected void OnEnable()
+    {
+        attackDistance = serializedObject.FindProperty("attackDistance");
+    }
+    public void OnSceneGUI()
+    {
+        var linkedObject = target as TurretController;
+        EditorGUI.BeginChangeCheck();
+
+        Handles.color = Color.red;
+        float newAttackDistance = Handles.RadiusHandle(Quaternion.identity, linkedObject.transform.position, attackDistance.floatValue, false);
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(target, "Update params");
+            attackDistance.floatValue = newAttackDistance;
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }
