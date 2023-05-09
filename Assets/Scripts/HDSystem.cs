@@ -6,7 +6,7 @@ public class HDSystem : MonoBehaviour
 {
     [SerializeField] private bool isMaser = false;
     [SerializeField] private float MaxHealth = 100;
-    public float CurrentHealth; //Фиксить блять!!! Нехуй пабликами бросаться
+    public float CurrentHealth;
     [SerializeField] private float Damage = 35;
 
     void Awake()
@@ -26,7 +26,7 @@ public class HDSystem : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.CompareTag("Untagged")) //Ну это тоже хуета так-то
+        if(other.gameObject.CompareTag("Untagged")) //Ну это тоже фигня так-то
             return;
         if(other.gameObject.GetComponent<HDSystem>().isMaser == false && isMaser == false)
             return;

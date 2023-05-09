@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    public GameObject explosionPrefab;
+    [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private float destroyDelay = 10f;
     private bool isExploded = false;
     private bool isQuitting = false;

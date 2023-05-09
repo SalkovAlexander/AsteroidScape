@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif // UNITY_EDITOR
 
 
 public class Enemy_move : MonoBehaviour
@@ -13,8 +16,11 @@ public class Enemy_move : MonoBehaviour
     [SerializeField] private LayerMask obstacleMask;
     [SerializeField] private float maxReflectionAngle = 45f;
     [SerializeField] private float turnSpeed = 10f;
-    [SerializeField] private Rigidbody rb;
-    public float Range = 5f;
+    [SerializeField] private GameObject explosionPrefab;
+
+    public float brakeForce = 10f;
+    private bool isQuitting = false;
+    private Rigidbody rb;
 
     void Start()
     {
@@ -61,10 +67,27 @@ public class Enemy_move : MonoBehaviour
             Vector3 moveDir = targetDir.normalized;
             Vector3 rotation = Vector3.RotateTowards(transform.forward, moveDir, turnSpeed * Time.deltaTime, 0f);
             rb.MoveRotation(Quaternion.LookRotation(rotation));
+            
+            rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, brakeForce * Time.fixedDeltaTime);
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
+
+    private void OnDestroy() {
+        if(!isQuitting)
+        {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Explosion explosionComponent = explosion.GetComponent<Explosion>();
+            explosionComponent.Activate(); 
         }
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(Enemy_move))]
 public class HandlesEditor : Editor
 {
@@ -95,3 +118,4 @@ public class HandlesEditor : Editor
         }
     }
 }
+#endif // UNITY_EDITOR

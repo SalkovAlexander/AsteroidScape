@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 749519561521300388}
   - component: {fileID: 7609378033607954934}
-  - component: {fileID: 7609378033607954935}
   m_Layer: 0
   m_Name: SK_lazer_04
   m_TagString: Untagged
@@ -50,19 +49,6 @@ MonoBehaviour:
   SpawnOffset: 5
   MissileTarget: {fileID: 0}
   isControlledByPlayer: 0
---- !u!114 &7609378033607954935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433881390531089952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e8c260d47d0d1047897b13db4b399db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  callInterval: 10
 --- !u!1 &1945196593028875848
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7931763066685994533}
-  - component: {fileID: 7609378033712504416}
+  - component: {fileID: 2075783726741984880}
   m_Layer: 0
   m_Name: SM_missileLauncher
   m_TagString: Untagged
@@ -284,7 +270,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7609378033712504416
+--- !u!114 &2075783726741984880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,7 +279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7302754818036198559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c17ca941aaeef4599e1907a6b469f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 8386e567aedb9d44f85fbec59c8dcea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   baseBone: {fileID: 3619742672054024377}
@@ -302,4 +288,6 @@ MonoBehaviour:
   aimPoint: {fileID: 749519561521300388}
   target: {fileID: 0}
   rotationSpeed: 60
-  maxRotationAngle: 10
+  maxRotationAngle: 180
+  attackDistance: 10
+  callInterval: 10
