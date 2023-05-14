@@ -8,14 +8,14 @@ public class HPBar : MonoBehaviour
     public float maxHP = 100;
     public float currentHP = 100;
 
-    public RectTransform foreground;  // Reference to the foreground image of the HP bar
+    public RectTransform foreground;
 
-    private float initialWidth;  // Initial width of the foreground image
+    private float initialWidth;
     [SerializeField] private GameObject Player;
 
     void Start()
     {
-        initialWidth = foreground.sizeDelta.x;  // Store the initial width of the foreground image
+        initialWidth = foreground.sizeDelta.x;
     }
 
     void Update()
